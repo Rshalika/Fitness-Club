@@ -7,4 +7,7 @@
     <string name="member">Member</string>
     <string name="avg_time">Avg. time</string>
     <string name="total_time">Total time</string>
+    <string name="group_members">Group Members</string>
+    <string name="search">Search</string>
+    <string name="add">Add</string>
 </resources>
