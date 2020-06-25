@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/light_blue"
     android:fitsSystemWindows="true"
-    tools:context=".MainActivity">
+    tools:context=".view.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/light_blue"
-            android:fitsSystemWindows="true"
+            android:fitsSystemWindows="false"
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleGravity="top"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
@@ -40,7 +40,7 @@
                     android:id="@+id/club_image"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="45dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -226,28 +226,28 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
-                android:layout_gravity="center_horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/tool_bar_height"
+                android:layout_gravity="center_horizontal"
                 android:background="@drawable/rounded_up_background"
-                app:layout_collapseMode="pin"
                 android:gravity="center"
+                app:layout_collapseMode="pin"
                 app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
-                app:title=""
+                app:popupTheme="@style/AppTheme.PopupOverlay"
 
-                app:titleTextColor="#000"
-                app:popupTheme="@style/AppTheme.PopupOverlay">
+                app:title=""
+                app:titleTextColor="#000">
 
                 <TextView
                     android:id="@+id/toolbar_title"
                     style="@style/TitleText0"
-                    android:gravity="center"
-                    android:textAlignment="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:background="@android:color/transparent"
-                    android:text="@string/groups" />
+                    android:gravity="center"
+                    android:text="@string/groups"
+                    android:textAlignment="center" />
 
             </androidx.appcompat.widget.Toolbar>
 
@@ -303,6 +303,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/group_members_text" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <RelativeLayout
+        android:id="@+id/loading_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFF"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
