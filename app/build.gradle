@@ -3,6 +3,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
@@ -21,6 +26,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
     }
 }
 
@@ -32,12 +38,15 @@ dependencies {
     implementation "androidx.core:core-ktx:$core_version"
     implementation "androidx.appcompat:appcompat:$appcompat_version"
     implementation "com.google.android.material:material:$material_version"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
+
 
     // Rx dependencies
     implementation "io.reactivex.rxjava3:rxandroid:$rxandroid_version"
     implementation "io.reactivex.rxjava3:rxjava:$rxjava_version"
     implementation "io.reactivex.rxjava3:rxkotlin:$rxkotlin_version"
     implementation "com.jakewharton.rxrelay3:rxrelay:$rxrelay_version"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 
 
     // Test dependencies

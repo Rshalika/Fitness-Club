@@ -13,6 +13,7 @@ buildscript {
         rxjava_version = "3.0.3"
         rxkotlin_version = "3.0.0"
         rxrelay_version = "3.0.0"
+        constraintlayout_version = "2.0.0-beta7"
     }
 
     repositories {

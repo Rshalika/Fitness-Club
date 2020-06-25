@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ფიტნეს კლუბი</string>
+    <string name="add_to_group">ჯგუფში დამატება</string>
+    <string name="groups">ჯგუფები</string>
+    <string name="change_picture">Change picture</string>
+    <string name="member">Member</string>
+    <string name="avg_time">Avg. time</string>
+    <string name="total_time">Total time</string>
+</resources>
