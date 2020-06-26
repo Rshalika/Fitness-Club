@@ -11,6 +11,7 @@ import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.android.material.appbar.AppBarLayout
@@ -68,13 +69,24 @@ class MainActivity : AppCompatActivity() {
         layoutManager = FixedForAppBarLayoutManager(this)
         members_list.adapter = adapter
         members_list.layoutManager = layoutManager
+        members_list.addItemDecoration(DividerItemDecoration(this, layoutManager.orientation))
         app_bar.addOnOffsetChangedListener(object :
             AppBarStateChangeListener(layoutManager, viewModel) {
+            override fun onOffsetChanged(offset: Int) {
+
+            }
+
             override fun onStateChanged(appBarLayout: AppBarLayout, state: State) {
                 appBarState = state
                 invalidateOptionsMenu()
             }
         })
+//
+//        rounded_top_view.outlineProvider = object : ViewOutlineProvider() {
+//            override fun getOutline(view: View, outline: Outline?) {
+//                outline?.setRoundRect(0, 0, view.width, view.height, 150F)
+//            }
+//        }
 
         disposable.add(viewModel.viewStateRelay.subscribeBy(
             onNext = {
@@ -236,6 +248,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         abstract fun onStateChanged(appBarLayout: AppBarLayout, state: State)
+        abstract fun onOffsetChanged(offset: Int)
     }
 
     private fun setUpLoadMoreListener() {
