@@ -12,11 +12,13 @@ data class ClubInfoViewModel(
 
     var totalTime: String,
 
-    var id: Int,
+    var myId: Int,
 
-    var position: Int,
+    var myPosition: Int,
 
-    var name: String,
+    var myName: String,
 
-    var hours: String
+    var myHours: String,
+
+    var myImageUrl: String
 )

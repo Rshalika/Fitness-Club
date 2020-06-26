@@ -5,9 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.strawhat.fitness_club.R
+
 
 class MemberAdapter(private val members: MutableList<ClubMemberViewModel>) :
     RecyclerView.Adapter<MemberAdapter.ViewHolder>() {
@@ -24,22 +27,37 @@ class MemberAdapter(private val members: MutableList<ClubMemberViewModel>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val member = members[position]
-        holder.number.text = "" + (position + 1)
+        val context = holder.itemView.context
+        holder.number.text = member.number.toString()
         holder.name.text = member.name
         holder.time.text = member.time
+        if (member.isCurrentUser) {
+            holder.itemView.setBackgroundColor(
+                ContextCompat.getColor(
+                    context,
+                    R.color.dark_mint_50
+                )
+            )
+            holder.time.setTextColor(ContextCompat.getColor(context, R.color.turquoise_blue))
+        }
 
         Glide
-            .with(holder.itemView.context)
+            .with(context)
             .load(member.image)
             .circleCrop()
             .placeholder(R.drawable.loader_image)
             .into(holder.image)
     }
 
-    fun setMembers(members: List<ClubMemberViewModel>) {
-        this.members.clear()
-        this.members.addAll(members)
+    fun setMembers(newList: List<ClubMemberViewModel>) {
+        val diffResult = DiffUtil.calculateDiff(
+            MyDiffCallback(this.members, newList)
+        )
+        members.clear()
+        members.addAll(newList)
+        diffResult.dispatchUpdatesTo(this)
     }
+
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val number: TextView = itemView.findViewById(R.id.number)

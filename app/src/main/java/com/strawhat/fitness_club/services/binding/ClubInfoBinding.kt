@@ -39,14 +39,15 @@ fun ClubInfoBinding.toViewModel(): ClubInfoViewModel {
     val avgTime = this.info.find { it.key == "საშ. დრო" }?.value!!
     val totalTime = this.info.find { it.key == "სულ დრო" }?.value!!
     return ClubInfoViewModel(
+        imageUrl = this.imageUrl,
         clubName = this.name,
-        imageUrl = this.me.imageUrl,
         members = members,
         avgTime = avgTime,
         totalTime = totalTime,
-        id = this.me.id,
-        position = this.me.position,
-        name = this.me.name,
-        hours = this.me.hours
+        myImageUrl = this.me.imageUrl,
+        myId = this.me.id,
+        myPosition = this.me.position,
+        myName = this.me.name,
+        myHours = this.me.hours
     )
 }

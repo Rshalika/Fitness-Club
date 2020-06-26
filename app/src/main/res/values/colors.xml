@@ -3,5 +3,8 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="dark_mint_50">#7559CE82</color>
+    <color name="dark_mint">#ABE1BE</color>
+    <color name="turquoise_blue">#00afcf</color>
     <color name="light_blue">#e4f7fb</color>
 </resources>

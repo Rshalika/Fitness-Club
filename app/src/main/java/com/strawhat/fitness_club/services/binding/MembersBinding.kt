@@ -30,7 +30,7 @@ fun MembersBinding.toViewModel(): List<ClubMemberViewModel> {
     this.members.forEach {
         res.add(
             ClubMemberViewModel(
-                number = it.position,
+                number = it.id,
                 name = it.name,
                 image = it.imageUrl,
                 time = it.hours,

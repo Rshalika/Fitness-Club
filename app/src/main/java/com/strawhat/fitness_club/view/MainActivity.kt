@@ -6,8 +6,8 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
@@ -28,6 +28,8 @@ import kotlin.math.abs
 
 private const val APP_BAR_STATE = "APP_BAR_STATE"
 
+private const val VISIBLE_THRESHOLD = 1
+
 class MainActivity : AppCompatActivity() {
 
 
@@ -39,6 +41,12 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels()
 
     private val adapter = MemberAdapter(mutableListOf())
+
+    private var lastVisibleItem = 0
+
+    private var totalItemCount: Int = 0
+
+    private lateinit var layoutManager: FixedForAppBarLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,9 +61,11 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout).title = title
+        layoutManager = FixedForAppBarLayoutManager(this)
         members_list.adapter = adapter
-        members_list.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        app_bar.addOnOffsetChangedListener(object : AppBarStateChangeListener() {
+        members_list.layoutManager = layoutManager
+        app_bar.addOnOffsetChangedListener(object :
+            AppBarStateChangeListener(layoutManager, viewModel) {
             override fun onStateChanged(appBarLayout: AppBarLayout, state: State) {
                 appBarState = state
                 invalidateOptionsMenu()
@@ -70,6 +80,8 @@ class MainActivity : AppCompatActivity() {
                 throw OnErrorNotImplementedException(it)
             }
         ))
+
+        setUpLoadMoreListener()
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -83,6 +95,20 @@ class MainActivity : AppCompatActivity() {
             time_info.text = info.avgTime
             total_time_info.text = info.totalTime
             club_name.text = info.clubName
+            if (state.lastVisiblePosition < state.info.myId) {
+                number.text = info.myId.toString()
+                profile_name.text = info.myName
+                profile_time.text = info.myHours
+                Glide
+                    .with(this)
+                    .load(info.myImageUrl)
+                    .circleCrop()
+                    .placeholder(R.drawable.loader_image)
+                    .into(profile_image)
+            }
+            me_layout.visibility =
+                (state.lastVisiblePosition < state.info.myId && state.lastVisiblePosition != 0).toVisibility()
+
             Glide
                 .with(this)
                 .load(info.imageUrl)
@@ -91,10 +117,10 @@ class MainActivity : AppCompatActivity() {
                 .into(club_image)
         }
 
-
         loading_bar.visibility = state.loading.toVisibility()
-        adapter.setMembers(state.members)
-        adapter.notifyDataSetChanged()
+        if (state.changedMembers) {
+            adapter.setMembers(state.members)
+        }
     }
 
     override fun onDestroy() {
@@ -137,15 +163,20 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    abstract class AppBarStateChangeListener : OnOffsetChangedListener {
+    abstract class AppBarStateChangeListener(
+        private val layoutManager: LinearLayoutManager,
+        private val viewModel: MainViewModel
+    ) : OnOffsetChangedListener {
         enum class State : Serializable {
             EXPANDED, COLLAPSED, IDLE
         }
 
-        private var mCurrentState =
-            State.IDLE
+        private var mCurrentState = State.IDLE
 
         override fun onOffsetChanged(appBarLayout: AppBarLayout, i: Int) {
+            val findLastVisibleItemPosition = this.layoutManager.findLastVisibleItemPosition()
+            viewModel.updateLastVisibleItem(findLastVisibleItemPosition)
+
             mCurrentState = when {
                 i == 0 -> {
                     if (mCurrentState != State.EXPANDED) {
@@ -178,6 +209,21 @@ class MainActivity : AppCompatActivity() {
         }
 
         abstract fun onStateChanged(appBarLayout: AppBarLayout, state: State)
+    }
+
+    private fun setUpLoadMoreListener() {
+
+        scroll.setOnScrollChangeListener { v: NestedScrollView?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int ->
+            val findLastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
+            println("-=-=-=- findLastVisibleItemPosition setOnScrollChangeListener $findLastVisibleItemPosition")
+            viewModel.updateLastVisibleItem(findLastVisibleItemPosition)
+            totalItemCount = layoutManager.itemCount
+            lastVisibleItem = findLastVisibleItemPosition
+            if (totalItemCount <= lastVisibleItem + VISIBLE_THRESHOLD) {
+                viewModel.loadNextPage()
+            }
+        }
+
     }
 
 }
