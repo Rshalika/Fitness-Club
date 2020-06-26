@@ -7,4 +7,5 @@
     <color name="dark_mint">#ABE1BE</color>
     <color name="turquoise_blue">#00afcf</color>
     <color name="light_blue">#e4f7fb</color>
+    <color name="delimiter_color">#d8d8d8</color>
 </resources>

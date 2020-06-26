@@ -10,4 +10,9 @@
     <string name="group_members">Group Members</string>
     <string name="search">Search</string>
     <string name="add">Add</string>
+    <string name="group_parameters">Group parameters</string>
+    <string name="assign_permission">Assign permission</string>
+    <string name="remove_members">Remove members</string>
+    <string name="remove_from_group">Remove from group</string>
+    <string name="leave_group">Leave group</string>
 </resources>

@@ -1,6 +1,10 @@
 package com.strawhat.fitness_club.view
 
+import android.content.Context
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.TextAppearanceSpan
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -82,6 +86,11 @@ class MainActivity : AppCompatActivity() {
         ))
 
         setUpLoadMoreListener()
+        options_button.setOnClickListener {
+            val dialog = OptionsFragment.newInstance()
+            dialog.show(supportFragmentManager, "OptionsFragment")
+        }
+
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -92,13 +101,13 @@ class MainActivity : AppCompatActivity() {
     private fun updateState(state: ClubViewState) {
         state.info?.let { info ->
             members_info.text = info.members.toString()
-            time_info.text = info.avgTime
-            total_time_info.text = info.totalTime
+            time_info.text = createCustomSpan(info.avgTime, R.style.TimeName)
+            total_time_info.text = createCustomSpan(info.totalTime, R.style.TimeName)
             club_name.text = info.clubName
             if (state.lastVisiblePosition < state.info.myId) {
                 number.text = info.myId.toString()
                 profile_name.text = info.myName
-                profile_time.text = info.myHours
+                profile_time.text = createCustomSpan(info.myHours, R.style.TimeName3)
                 Glide
                     .with(this)
                     .load(info.myImageUrl)
@@ -120,6 +129,24 @@ class MainActivity : AppCompatActivity() {
         loading_bar.visibility = state.loading.toVisibility()
         if (state.changedMembers) {
             adapter.setMembers(state.members)
+        }
+    }
+
+    private fun createCustomSpan(text: String, appearance: Int): SpannableString {
+        val spannableString = SpannableString(text)
+        setSpanIfFound(text, spannableString, "სთ", appearance, this)
+        setSpanIfFound(text, spannableString, "წთ", appearance, this)
+        return spannableString
+    }
+
+    private fun setSpanIfFound(text: String, spannableString: SpannableString, token: String, appearance: Int, context: Context) {
+        val index = text.indexOf(token)
+        if (index >= 0) {
+            spannableString.setSpan(
+                TextAppearanceSpan(context, appearance),
+                index, index + 2,
+                Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+            )
         }
     }
 

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.OptionsFragment">
+
+    <TextView
+        android:id="@+id/group_parameters_text"
+        style="@style/TitleText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="22dp"
+        android:background="@android:color/transparent"
+        android:text="@string/group_parameters"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/delimiter"
+        android:layout_width="44dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/rounded_rect"
+        app:layout_constraintStart_toStartOf="@id/group_parameters_text"
+        app:layout_constraintTop_toBottomOf="@id/group_parameters_text" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/close_button"
+        style="@style/Widget.AppTheme.Button.IconButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="#FFF"
+        android:foreground="?attr/selectableItemBackground"
+        app:icon="@drawable/ic_baseline_close_24"
+        app:iconSize="40dp"
+        app:iconTint="#474B40"
+        app:layout_constraintBottom_toBottomOf="@id/group_parameters_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/group_parameters_text" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/delimiter_color"
+        app:layout_constraintBottom_toTopOf="@id/assign_permissions_button" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/assign_permissions_button"
+        style="@style/listTitleStyle.Button"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="18dp"
+        android:gravity="center_vertical"
+        android:paddingStart="20dp"
+        android:paddingTop="0dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="0dp"
+        android:text="@string/assign_permission"
+        android:textAllCaps="false"
+        app:icon="@drawable/ic_permissions"
+        app:iconPadding="15dp"
+        app:iconTint="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/delimiter" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/delimiter_color"
+        app:layout_constraintBottom_toTopOf="@id/delete_members_button" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/delete_members_button"
+        style="@style/listTitleStyle.Button"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:gravity="center_vertical"
+        android:paddingStart="20dp"
+        android:paddingTop="0dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="0dp"
+        android:text="@string/remove_members"
+        android:textAllCaps="false"
+        app:icon="@drawable/ic_remove_user_1"
+        app:iconPadding="15dp"
+        app:iconTint="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/assign_permissions_button" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/delimiter_color"
+        app:layout_constraintBottom_toTopOf="@id/leave_group_button" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/leave_group_button"
+        style="@style/listTitleStyle.Button"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:gravity="center_vertical"
+        android:paddingStart="20dp"
+        android:paddingTop="0dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="0dp"
+        android:text="@string/leave_group"
+        android:textAllCaps="false"
+        android:textColor="#ed2f3f"
+        app:icon="@drawable/ic_leave_group"
+        app:iconPadding="15dp"
+        app:iconTint="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/delete_members_button" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/delimiter_color"
+        app:layout_constraintTop_toBottomOf="@id/leave_group_button" />
+</androidx.constraintlayout.widget.ConstraintLayout>

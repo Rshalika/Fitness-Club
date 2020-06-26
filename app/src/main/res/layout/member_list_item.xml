@@ -1,54 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<com.guanaj.easyswipemenulibrary.EasySwipeMenuLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="56dp">
+    android:layout_height="56dp"
+    app:contentView="@id/content"
+    app:leftMenuView="@id/assign_permissions_list"
+    app:rightMenuView="@id/remove_from_group_list">
 
-    <TextView
-        android:id="@+id/number"
-        style="@style/ItemBody"
-        android:gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:height="40dp"
-        android:text="1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/assign_permissions_list"
+        style="@style/Widget.AppTheme.Button.IconButton"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:backgroundTint="#FFF"
+        android:foreground="?attr/selectableItemBackground"
+        app:icon="@drawable/ic_give_admin"
+        app:iconSize="48dp"
+        app:iconTint="@null" />
 
-    <ImageView
-        android:id="@+id/profile_image"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="18dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/number"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription" />
 
-    <TextView
-        android:id="@+id/profile_name"
-        style="@style/ItemBody"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="18.3dp"
-        android:lines="1"
-        android:text="asdasd asdasd as"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/profile_image"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
 
-    <TextView
-        android:id="@+id/profile_time"
-        style="@style/ItemBody2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:text="asdasd"
-        android:textAlignment="textEnd"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/number"
+            style="@style/ItemBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:height="40dp"
+            android:gravity="center"
+            android:text="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/number"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/profile_name"
+            style="@style/ItemBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18.3dp"
+            android:lines="1"
+            android:text="asdasd asdasd as"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/profile_image"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/profile_time"
+            style="@style/ItemBody2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:text="asdasd"
+            android:textAlignment="textEnd"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/remove_from_group_list"
+        style="@style/Widget.AppTheme.Button.IconButton"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:backgroundTint="#FFF"
+        android:foreground="?attr/selectableItemBackground"
+        app:icon="@drawable/ic_remove_user"
+        app:iconSize="48dp"
+        app:iconTint="@null" />
+</com.guanaj.easyswipemenulibrary.EasySwipeMenuLayout>

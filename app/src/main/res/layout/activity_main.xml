@@ -291,6 +291,7 @@
             app:layout_constraintTop_toBottomOf="@id/group_members_text" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/options_button"
             style="@style/Widget.AppTheme.Button.IconButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
@@ -304,18 +305,6 @@
             app:layout_constraintTop_toTopOf="@id/group_members_text" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <RelativeLayout
-        android:id="@+id/loading_bar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#FFF"
-        android:visibility="gone">
-
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true" />
-    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -380,5 +369,17 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/loading_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFF"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
